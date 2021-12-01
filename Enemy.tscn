@@ -1,0 +1,199 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Enemy.png" type="Texture" id=1]
+[ext_resource path="res://Enemy.gd" type="Script" id=2]
+[ext_resource path="res://EnemySight.png" type="Texture" id=3]
+[ext_resource path="res://TextBox.png" type="Texture" id=4]
+[ext_resource path="res://little-conquest.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 13 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 7, 6 )
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+loop = true
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20, 21, 22, 23, 24 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../EnemySight:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 7 ]
+}
+
+[sub_resource type="DynamicFont" id=9]
+size = 8
+outline_size = 1
+outline_color = Color( 0.0784314, 0.105882, 0.152941, 1 )
+font_data = ExtResource( 5 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
+collision_layer = 2048
+collision_mask = 1024
+script = ExtResource( 2 )
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 0, -24 )
+texture = ExtResource( 1 )
+hframes = 3
+vframes = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -13 )
+shape = SubResource( 1 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -25 )
+collision_mask = 1024
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2( 0, -25 )
+enabled = true
+cast_to = Vector2( 0, 25 )
+collision_mask = 1024
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2( 0, -13 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+collision_mask = 1024
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+position = Vector2( 13, 0 )
+enabled = true
+cast_to = Vector2( 0, 2 )
+collision_mask = 1024
+
+[node name="EnemySight" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.564706, 0.564706, 0.564706, 0.294118 )
+position = Vector2( 0, -24 )
+z_index = 21
+texture = ExtResource( 3 )
+hframes = 3
+vframes = 3
+frame = 4
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 8, 0 )
+collision_layer = 1024
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -11 )
+shape = SubResource( 2 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2( 10, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2( 0, -20 )
+shape = SubResource( 3 )
+
+[node name="Area2D3" type="Area2D" parent="."]
+position = Vector2( 7, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2( 0, -14 )
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/AngryRun = SubResource( 5 )
+anims/Attack = SubResource( 6 )
+anims/Patrol = SubResource( 7 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="AnimationPlayer"]
+anims/Sight = SubResource( 8 )
+
+[node name="TextBox" type="Sprite" parent="."]
+position = Vector2( 28, -53 )
+z_index = 1
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="Label" type="Label" parent="TextBox"]
+margin_left = -14.0
+margin_top = 1.0
+margin_right = -10.0
+margin_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.854902, 0.882353, 0.898039, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "E"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="area_collided"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="timeout"]

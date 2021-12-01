@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://QueenAnt.png" type="Texture" id=1]
+[ext_resource path="res://QueenAnt.gd" type="Script" id=2]
+[ext_resource path="res://little-conquest.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://TextBox.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+outline_size = 1
+outline_color = Color( 0.0784314, 0.105882, 0.152941, 1 )
+font_data = ExtResource( 3 )
+
+[node name="QueenAnt" type="Sprite"]
+position = Vector2( 1, -30 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TextBox" type="Sprite" parent="."]
+position = Vector2( 27, -40 )
+z_index = 1
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="Label" type="Label" parent="TextBox"]
+margin_left = -14.0
+margin_top = 1.0
+margin_right = -10.0
+margin_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.854902, 0.882353, 0.898039, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "E"
+__meta__ = {
+"_edit_use_anchors_": false
+}
